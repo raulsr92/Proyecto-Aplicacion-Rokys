@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ProyectoEP01Sanchez</string>
+    <string name="title_activity_food">FoodActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
+    <string name="button_1">Compra ahora</string>
+    <string name="button_2">Ordena ahora</string>
+    <string name="button_3">¡Agregar al carrito!</string>
+    <string name="button_4">Visítanos!</string>
+
+    <string name="bottom_bar_option1">Menu</string>
+    <string name="bottom_bar_option2">Historial</string>
+    <string name="bottom_bar_option3">Promo</string>
+    <string name="bottom_bar_option4">Perfil</string>
+    <string name="phrase_1">Recomendado para ti</string>
+    <string name="phrase_2">¿Qué te provoca comer?</string>
+    <string name="phrase_3">Acerca de este menú</string>
+    <string name="phrase_4">Nuestro pollo es diferente</string>
+
+    <string name="food_1">Brasas</string>
+    <string name="food_2">Parrillas</string>
+    <string name="food_3">Piqueos</string>
+    <string name="food_4">Ensaladas</string>
+    <string name="link_1">Ver más</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_locales">LocalesActivity</string>
+    <string name="title_activity_maestro">MaestroActivity</string>
+    <string name="title_activity_paises">PaisesActivity</string>
+    <string name="title_activity_detalle">DetalleActivity</string>
+    <string name="title_activity_paises_insert">PaisesInsertActivity</string>
+
+</resources>
