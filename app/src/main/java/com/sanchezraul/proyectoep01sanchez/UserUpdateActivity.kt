@@ -45,25 +45,42 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.dao.DatabaseProvider
+import com.sanchezraul.proyectoep01sanchez.dao.User
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color5
 import com.sanchezraul.proyectoep01sanchez.ui.theme.ProyectoEP01SanchezTheme
+import kotlinx.coroutines.launch
 
 class UserUpdateActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var bundle = intent.extras
+
+        var idroom = bundle!!.getInt("idroom")
+        var nameroom = bundle.getString("nameroom")
+        var lastnameroom = bundle.getString("lastnameroom")
+        var emailroom = bundle.getString("emailroom")
+        var telefonoroom = bundle.getString("telefonoroom")
+        var passwordroom = bundle.getString("passwordroom")
+        var dniroom = bundle.getString("dniroom")
+
         enableEdgeToEdge()
         setContent {
-            var name by remember { mutableStateOf("") }
-            var lastName by remember { mutableStateOf("") }
-            var email by remember { mutableStateOf("") }
-            var celular by remember { mutableStateOf("") }
-            var password by remember { mutableStateOf("") }
-            var dni by remember { mutableStateOf("") }
+            var idf by remember { mutableStateOf(idroom.toString()) }
+            var namef by remember { mutableStateOf(nameroom.toString()) }
+            var lastnamef by remember { mutableStateOf(lastnameroom.toString()) }
+            var emailf by remember { mutableStateOf(emailroom.toString()) }
+            var celularf by remember { mutableStateOf(telefonoroom.toString()) }
+            var passwordf by remember { mutableStateOf(passwordroom.toString()) }
+            var dnif by remember { mutableStateOf(dniroom.toString()) }
+
             ProyectoEP01SanchezTheme {
                 Scaffold(
                     modifier = Modifier
@@ -186,6 +203,30 @@ class UserUpdateActivity : ComponentActivity() {
                         }
                         Spacer(modifier = Modifier.height(10.dp))
 
+                        Column(
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(15.dp, 0.dp, 15.dp, 0.dp)
+                            ,
+                        ) {
+                            OutlinedTextField(
+                                modifier = Modifier.width(100.dp),
+                                value = idf,
+                                //shape = RoundedCornerShape(20.dp),
+                                onValueChange = {
+                                },
+                                label = {
+                                    Text(
+                                        text = "Código",
+                                        style = MaterialTheme.typography.displayMedium,
+                                    )
+                                },
+                                textStyle = TextStyle(
+                                    color = Color3,
+                                )
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(20.dp))
+
                         Row(
                             modifier = Modifier.fillMaxWidth()
                                 .padding(15.dp, 0.dp, 15.dp, 0.dp)
@@ -199,10 +240,10 @@ class UserUpdateActivity : ComponentActivity() {
                                 modifier = Modifier.weight(1f)
                             ) {
                                 OutlinedTextField(
-                                    value = name,
+                                    value = namef,
                                     //shape = RoundedCornerShape(20.dp),
                                     onValueChange = {
-                                        name=it
+                                        namef=it
                                     },
                                     label = {
                                         Text(
@@ -217,10 +258,10 @@ class UserUpdateActivity : ComponentActivity() {
                                 Spacer(modifier = Modifier.height(35.dp))
 
                                 OutlinedTextField(
-                                    value = email,
+                                    value = emailf,
                                     //shape = RoundedCornerShape(20.dp),
                                     onValueChange = {
-                                        email=it
+                                        emailf=it
                                     },
                                     label = {
                                         Text(
@@ -236,10 +277,10 @@ class UserUpdateActivity : ComponentActivity() {
                                 Spacer(modifier = Modifier.height(35.dp))
 
                                 OutlinedTextField(
-                                    value = password,
+                                    value = passwordf,
                                     //shape = RoundedCornerShape(20.dp),
                                     onValueChange = {
-                                        password=it
+                                        passwordf=it
                                     },
                                     label = {
                                         Text(
@@ -262,10 +303,10 @@ class UserUpdateActivity : ComponentActivity() {
 
                             ) {
                                 OutlinedTextField(
-                                    value = lastName,
+                                    value = lastnamef,
                                     //shape = RoundedCornerShape(20.dp),
                                     onValueChange = {
-                                        lastName=it
+                                        lastnamef=it
                                     },
                                     label = {
                                         Text(
@@ -279,10 +320,10 @@ class UserUpdateActivity : ComponentActivity() {
                                 )
                                 Spacer(modifier = Modifier.height(35.dp))
                                 OutlinedTextField(
-                                    value = celular,
+                                    value = celularf,
                                     //shape = RoundedCornerShape(20.dp),
                                     onValueChange = {
-                                        celular=it
+                                        celularf=it
                                     },
                                     label = {
                                         Text(
@@ -296,10 +337,10 @@ class UserUpdateActivity : ComponentActivity() {
                                 )
                                 Spacer(modifier = Modifier.height(35.dp))
                                 OutlinedTextField(
-                                    value = dni,
+                                    value = dnif,
                                     //shape = RoundedCornerShape(20.dp),
                                     onValueChange = {
-                                        dni=it
+                                        dnif=it
                                     },
                                     label = {
                                         Text(
@@ -314,7 +355,7 @@ class UserUpdateActivity : ComponentActivity() {
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(40.dp))
+                        Spacer(modifier = Modifier.height(20.dp))
 
                         Column(      modifier = Modifier
                             .fillMaxWidth()
@@ -323,21 +364,50 @@ class UserUpdateActivity : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
+                                    val database = DatabaseProvider.getDatabase(this@UserUpdateActivity)
+                                    val userDao = database.userDao()
+                                    lifecycleScope.launch {
+                                        val user = User(
+                                            idroom =idf.toInt(),
+                                            nameroom = namef,
+                                            lastnameroom = lastnamef,
+                                            emailroom = emailf,
+                                            telefonoroom = celularf,
+                                            dniroom= dnif,
+                                            passwordroom = passwordf,
+                                        )
+                                        userDao.updateUser(user)
+                                        finish()
+                                    }
                                 },
                                 modifier = Modifier.fillMaxWidth()
                                     .height(55.dp)
 
                             ) {
                                 Text(
-                                    text = "Únete ahora".uppercase(),
+                                    text = "Actualizar".uppercase(),
                                     color = Color2,
                                     style = MaterialTheme.typography.displayMedium,
-
                                     )
                             }
-                            Spacer(modifier = Modifier.height(10.dp))
+                            Spacer(modifier = Modifier.height(15.dp))
                             OutlinedButton (
                                 onClick = {
+                                    val database = DatabaseProvider.getDatabase(this@UserUpdateActivity)
+                                    val userDao = database.userDao()
+                                    lifecycleScope.launch {
+                                        val user = User(
+                                            idroom =idf.toInt(),
+                                            nameroom = namef,
+                                            lastnameroom = lastnamef,
+                                            emailroom = emailf,
+                                            telefonoroom = celularf,
+                                            dniroom= dnif,
+                                            passwordroom = passwordf,
+                                        )
+                                        userDao.deleteUser(user)
+                                        finish()
+                                    }
                                 },
                                 modifier = Modifier.fillMaxWidth()
                                     .height(55.dp),

@@ -46,12 +46,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.dao.DatabaseProvider
+import com.sanchezraul.proyectoep01sanchez.dao.User
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color5
 import com.sanchezraul.proyectoep01sanchez.ui.theme.ProyectoEP01SanchezTheme
+import kotlinx.coroutines.launch
 
 class UserInsertActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -325,6 +329,21 @@ class UserInsertActivity : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
+                                    val database = DatabaseProvider.getDatabase(this@UserInsertActivity)
+                                    val userDao = database.userDao()
+                                    lifecycleScope.launch {
+                                        val user = User(
+                                            nameroom = name,
+                                            lastnameroom = lastName,
+                                            emailroom = email,
+                                            telefonoroom = celular,
+                                            passwordroom = password,
+                                            dniroom = dni
+                                        )
+                                        userDao.insertUser(user)
+                                        finish()
+                                    }
+
                                 },
                                 modifier = Modifier.fillMaxWidth()
                                     .height(55.dp)
