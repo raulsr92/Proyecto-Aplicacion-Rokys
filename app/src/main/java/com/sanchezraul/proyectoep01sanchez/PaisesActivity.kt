@@ -180,30 +180,11 @@ class PaisesActivity : ComponentActivity() {
                     },
                     bottomBar = {
                         DrawBottomBar(
-                            {
-                                startActivity(
-                                    Intent(
-                                        this@PaisesActivity,
-                                        MaestroActivity::class.java
-                                    )
-                                )
-                            },
-                            {
-                                startActivity(
-                                    Intent(
-                                        this@PaisesActivity,
-                                        LocalesActivity::class.java
-                                    )
-                                )
-                            },
-                            {
-                                startActivity(
-                                    Intent(
-                                        this@PaisesActivity,
-                                        PaisesActivity::class.java
-                                    )
-                                )
-                            })
+                            {startActivity(Intent(this@PaisesActivity, MaestroActivity::class.java))},
+                            {startActivity(Intent(this@PaisesActivity, LocalesActivity::class.java))},
+                            { startActivity(Intent(this@PaisesActivity, PaisesActivity::class.java))},
+                            {startActivity(Intent(this@PaisesActivity, LoginActivity::class.java))}
+                        )
                     },
                     floatingActionButton = {
                         FloatingActionButton(

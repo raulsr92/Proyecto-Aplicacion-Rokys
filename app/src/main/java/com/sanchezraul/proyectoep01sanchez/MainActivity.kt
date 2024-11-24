@@ -101,7 +101,9 @@ class MainActivity : ComponentActivity() {
                         DrawBottomBar(
                             {startActivity(Intent(this@MainActivity, MaestroActivity::class.java))},
                             {startActivity(Intent(this@MainActivity, LocalesActivity::class.java))},
-                            { startActivity(Intent(this@MainActivity, PaisesActivity::class.java))})
+                            { startActivity(Intent(this@MainActivity, PaisesActivity::class.java))},
+                            {startActivity(Intent(this@MainActivity, LoginActivity::class.java))}
+                            )
                     },
                 ) { innerPadding ->
                     Column(

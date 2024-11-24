@@ -151,7 +151,8 @@ class FoodActivity : ComponentActivity() {
                         DrawBottomBar(
                             {startActivity(Intent(this@FoodActivity, MaestroActivity::class.java))},
                             {startActivity(Intent(this@FoodActivity, LocalesActivity::class.java))},
-                            { startActivity(Intent(this@FoodActivity, PaisesActivity::class.java))})
+                            { startActivity(Intent(this@FoodActivity, PaisesActivity::class.java))},
+                            {startActivity(Intent(this@FoodActivity, LoginActivity::class.java))})
 
                     },
                 ) { innerPadding ->
@@ -326,7 +327,6 @@ class FoodActivity : ComponentActivity() {
                                       }
 
                                     }
-
                                 }
                             }
 

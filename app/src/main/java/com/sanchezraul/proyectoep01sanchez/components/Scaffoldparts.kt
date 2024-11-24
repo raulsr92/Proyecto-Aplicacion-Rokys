@@ -21,7 +21,7 @@ import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color4
 
 @Composable
-fun DrawBottomBar(onclick: () -> Unit,onclick2: () -> Unit, onclick3: () -> Unit) {
+fun DrawBottomBar(onclick: () -> Unit,onclick2: () -> Unit, onclick3: () -> Unit,onclick4: () -> Unit) {
     BottomAppBar(
         containerColor = Color2,
         modifier = Modifier
@@ -105,7 +105,7 @@ fun DrawBottomBar(onclick: () -> Unit,onclick2: () -> Unit, onclick3: () -> Unit
             )
             NavigationBarItem(
                 selected = false,
-                onClick = {},
+                onClick = onclick4,
                 icon = {
                     Image(
                         painter = painterResource(id= R.drawable.perfil),

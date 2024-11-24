@@ -89,7 +89,7 @@ class DetalleActivity : ComponentActivity() {
     private fun readService(idcategoria: String?) {
         val queue = Volley.newRequestQueue(this)
         val url =
-            "http://192.168.0.3:8081/servicioweb/serviciodetalle.php?idcategoria=$idcategoria";
+            "http://192.168.0.5:8081/servicioweb/serviciodetalle.php?idcategoria=$idcategoria";
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -226,7 +226,8 @@ class DetalleActivity : ComponentActivity() {
                                         PaisesActivity::class.java
                                     )
                                 )
-                            })
+                            },
+                            {startActivity(Intent(this@DetalleActivity, LoginActivity::class.java))})
                     },
                 ) { innerPadding ->
                     Column(

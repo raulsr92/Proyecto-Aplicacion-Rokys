@@ -17,6 +17,26 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UserUpdateActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user_update"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
+            android:name=".UserInsertActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user_insert"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
+            android:name=".UserActivty"
+            android:exported="false"
+            android:label="@string/title_activity_user_activty"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
             android:name=".PaisesInsertActivity"
             android:exported="false"
             android:label="@string/title_activity_paises_insert"

@@ -65,7 +65,7 @@ class LocalesActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val queue = Volley.newRequestQueue(this)
-        val url = "http://192.168.0.3:8081/servicioweb/locales.php"
+        val url = "http://192.168.0.5:8081/servicioweb/locales.php"
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -152,7 +152,8 @@ class LocalesActivity : ComponentActivity() {
                         DrawBottomBar(
                             {startActivity(Intent(this@LocalesActivity, MaestroActivity::class.java))},
                             {startActivity(Intent(this@LocalesActivity, LocalesActivity::class.java))},
-                            { startActivity(Intent(this@LocalesActivity, PaisesActivity::class.java))})
+                            { startActivity(Intent(this@LocalesActivity, PaisesActivity::class.java))},
+                            {startActivity(Intent(this@LocalesActivity, LoginActivity::class.java))})
                     },
                 ) { innerPadding ->
                     Column(

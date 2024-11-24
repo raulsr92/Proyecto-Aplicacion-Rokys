@@ -64,7 +64,7 @@ class MaestroActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val queue = Volley.newRequestQueue(this)
-        val url = "http://192.168.0.3:8081/servicioweb/serviciomaestro.php"
+        val url = "http://192.168.0.5:8081/servicioweb/serviciomaestro.php"
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -177,7 +177,8 @@ class MaestroActivity : ComponentActivity() {
                         DrawBottomBar(
                             {startActivity(Intent(this@MaestroActivity, MaestroActivity::class.java))},
                             {startActivity(Intent(this@MaestroActivity, LocalesActivity::class.java))},
-                            { startActivity(Intent(this@MaestroActivity, PaisesActivity::class.java))})
+                            { startActivity(Intent(this@MaestroActivity, PaisesActivity::class.java))},
+                            {startActivity(Intent(this@MaestroActivity, LoginActivity::class.java))})
 
                     },
                 ) { innerPadding ->

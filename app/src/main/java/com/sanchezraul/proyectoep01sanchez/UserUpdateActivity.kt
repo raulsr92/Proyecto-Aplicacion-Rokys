@@ -2,10 +2,10 @@ package com.sanchezraul.proyectoep01sanchez
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,20 +22,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
@@ -49,11 +42,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
@@ -61,20 +52,18 @@ import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color5
 import com.sanchezraul.proyectoep01sanchez.ui.theme.ProyectoEP01SanchezTheme
 
-class PaisesInsertActivity : ComponentActivity() {
+class UserUpdateActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var pais by remember { mutableStateOf("") }
-            var capital by remember { mutableStateOf("") }
-            var poblacion by remember { mutableStateOf("") }
-            var continente by remember { mutableStateOf("") }
-            var codigo by remember { mutableStateOf("") }
-            var area by remember { mutableStateOf("") }
-
-
+            var name by remember { mutableStateOf("") }
+            var lastName by remember { mutableStateOf("") }
+            var email by remember { mutableStateOf("") }
+            var celular by remember { mutableStateOf("") }
+            var password by remember { mutableStateOf("") }
+            var dni by remember { mutableStateOf("") }
             ProyectoEP01SanchezTheme {
                 Scaffold(
                     modifier = Modifier
@@ -107,7 +96,7 @@ class PaisesInsertActivity : ComponentActivity() {
                                             .clickable {
                                                 startActivity(
                                                     Intent(
-                                                        this@PaisesInsertActivity,
+                                                        this@UserUpdateActivity,
                                                         MainActivity::class.java
                                                     )
                                                 )
@@ -144,7 +133,7 @@ class PaisesInsertActivity : ComponentActivity() {
                             {
                                 startActivity(
                                     Intent(
-                                        this@PaisesInsertActivity,
+                                        this@UserUpdateActivity,
                                         MaestroActivity::class.java
                                     )
                                 )
@@ -152,7 +141,7 @@ class PaisesInsertActivity : ComponentActivity() {
                             {
                                 startActivity(
                                     Intent(
-                                        this@PaisesInsertActivity,
+                                        this@UserUpdateActivity,
                                         LocalesActivity::class.java
                                     )
                                 )
@@ -160,12 +149,19 @@ class PaisesInsertActivity : ComponentActivity() {
                             {
                                 startActivity(
                                     Intent(
-                                        this@PaisesInsertActivity,
+                                        this@UserUpdateActivity,
                                         PaisesActivity::class.java
                                     )
                                 )
                             },
-                            {startActivity(Intent(this@PaisesInsertActivity, LoginActivity::class.java))})
+                            {
+                                startActivity(
+                                    Intent(
+                                        this@UserUpdateActivity,
+                                        LoginActivity::class.java
+                                    )
+                                )
+                            })
                     },
                 ) { innerPadding ->
                     Column(
@@ -177,207 +173,191 @@ class PaisesInsertActivity : ComponentActivity() {
                     ) {
                         Spacer(modifier = Modifier.height(5.dp))
 
-                        Column (
+                        Column(
                             modifier = Modifier.fillMaxWidth()
-                            .padding(0.dp, 20.dp, 0.dp, 10.dp)
-                                ,
+                                .padding(0.dp, 20.dp, 0.dp, 0.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
-                        ){
+                        ) {
                             Text(
-                                text = "Registra un nuevo país".uppercase(),
+                                text = "Actualizar mis datos".uppercase(),
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = Color1
                             )
                         }
-                        Spacer(modifier = Modifier.height(0.dp))
-                        Column(
-                            modifier = Modifier.fillMaxSize()
-                                ,
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                        Spacer(modifier = Modifier.height(10.dp))
 
-                            ) {
-                            OutlinedTextField(
-                                value= pais,
-                                //shape = RoundedCornerShape(20.dp),
-                                onValueChange = {
-                                    pais = it
-                                },
-                                label = {
-                                    Text(
-                                        text="País",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            OutlinedTextField(
-                                value= capital,
-                                //shape = RoundedCornerShape(20.dp),
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(15.dp, 0.dp, 15.dp, 0.dp)
+                            ,
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
 
-                                onValueChange = {
-                                    capital = it
-                                },
-                                label = {
-                                    Text(
-                                        text="Capital",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            OutlinedTextField(
-                                value= poblacion,
-                                //shape = RoundedCornerShape(20.dp),
-
-                                onValueChange = {
-                                    poblacion = it
-                                },
-                                label = {
-                                    Text(
-                                        text="Población",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            OutlinedTextField(
-                                value= continente,
-                                //shape = RoundedCornerShape(20.dp),
-
-                                onValueChange = {
-                                    continente = it
-                                },
-                                label = {
-                                    Text(
-                                        text="Continente",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            Row(
-                                modifier = Modifier
-                                    .padding(40.dp, 0.dp, 40.dp, 0.dp)
-                                    ,
-                                horizontalArrangement = Arrangement.Center
-
+                        ) {
+                            Column(
+                                //distribuir 50% de ancho para la columna dentro de la fila
+                                modifier = Modifier.weight(1f)
                             ) {
                                 OutlinedTextField(
-                                    value= codigo,
+                                    value = name,
                                     //shape = RoundedCornerShape(20.dp),
-
                                     onValueChange = {
-                                        codigo = it
+                                        name=it
                                     },
                                     label = {
                                         Text(
-                                            text="Código",
+                                            text = "Nombre",
                                             style = MaterialTheme.typography.displayMedium,
                                         )
                                     },
                                     textStyle = TextStyle(
                                         color = Color3,
-                                    ),
-                                    modifier = Modifier.fillMaxWidth(0.4f)
-
+                                    )
                                 )
-                                Spacer(modifier = Modifier.width(10.dp))
+                                Spacer(modifier = Modifier.height(35.dp))
 
                                 OutlinedTextField(
-                                    value= area,
+                                    value = email,
                                     //shape = RoundedCornerShape(20.dp),
-
                                     onValueChange = {
-                                        area = it
+                                        email=it
                                     },
                                     label = {
                                         Text(
-                                            text="Área",
+                                            text = "E-mail",
                                             style = MaterialTheme.typography.displayMedium,
                                         )
                                     },
+                                    textStyle = TextStyle(
+                                        color = Color3,
+                                    )
+                                )
+
+                                Spacer(modifier = Modifier.height(35.dp))
+
+                                OutlinedTextField(
+                                    value = password,
+                                    //shape = RoundedCornerShape(20.dp),
+                                    onValueChange = {
+                                        password=it
+                                    },
+                                    label = {
+                                        Text(
+                                            text = "Contraseña",
+                                            style = MaterialTheme.typography.displayMedium,
+                                        )
+                                    },
+                                    visualTransformation = PasswordVisualTransformation(),
                                     textStyle = TextStyle(
                                         color = Color3,
                                     )
                                 )
                             }
+                            Spacer(modifier = Modifier.width(10.dp))
 
-                            Spacer(modifier = Modifier.height(15.dp))
+                            Column(
+                                //distribuir 50% de ancho para la columna dentro de la fila
 
-                            Column (
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(50.dp,0.dp,50.dp,0.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                modifier = Modifier.weight(1f)
+
                             ) {
-                                Button(
-                                    onClick = {
-                                        insertCountry(pais, capital, poblacion, continente, codigo, area)
+                                OutlinedTextField(
+                                    value = lastName,
+                                    //shape = RoundedCornerShape(20.dp),
+                                    onValueChange = {
+                                        lastName=it
                                     },
-                                    modifier = Modifier.fillMaxWidth()
-                                        .height(55.dp)
-
-                                ) {
-                                    Text(
-                                        text = "Registrar".uppercase(),
-                                        color  = Color2,
-                                        style = MaterialTheme.typography.displayMedium,
-
+                                    label = {
+                                        Text(
+                                            text = "Apellido",
+                                            style = MaterialTheme.typography.displayMedium,
                                         )
-                                }
+                                    },
+                                    textStyle = TextStyle(
+                                        color = Color3,
+                                    )
+                                )
+                                Spacer(modifier = Modifier.height(35.dp))
+                                OutlinedTextField(
+                                    value = celular,
+                                    //shape = RoundedCornerShape(20.dp),
+                                    onValueChange = {
+                                        celular=it
+                                    },
+                                    label = {
+                                        Text(
+                                            text = "Celular",
+                                            style = MaterialTheme.typography.displayMedium,
+                                        )
+                                    },
+                                    textStyle = TextStyle(
+                                        color = Color3,
+                                    )
+                                )
+                                Spacer(modifier = Modifier.height(35.dp))
+                                OutlinedTextField(
+                                    value = dni,
+                                    //shape = RoundedCornerShape(20.dp),
+                                    onValueChange = {
+                                        dni=it
+                                    },
+                                    label = {
+                                        Text(
+                                            text = "Nro DNI",
+                                            style = MaterialTheme.typography.displayMedium,
+                                        )
+                                    },
+                                    textStyle = TextStyle(
+                                        color = Color3,
+                                    )
+                                )
                             }
                         }
 
+                        Spacer(modifier = Modifier.height(40.dp))
 
+                        Column(      modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(50.dp,0.dp,50.dp,0.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally)
+                        {
+                            Button(
+                                onClick = {
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                                    .height(55.dp)
+
+                            ) {
+                                Text(
+                                    text = "Únete ahora".uppercase(),
+                                    color = Color2,
+                                    style = MaterialTheme.typography.displayMedium,
+
+                                    )
+                            }
+                            Spacer(modifier = Modifier.height(10.dp))
+                            OutlinedButton (
+                                onClick = {
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                                    .height(55.dp),
+                                //cambio de color de borde
+                                border = BorderStroke(2.dp, Color1)
+
+
+                            ) {
+                                Text(
+                                    text = "Eliminar".uppercase(),
+                                    color  = Color1,
+                                    style = MaterialTheme.typography.displayMedium,
+
+                                    )
+                            }
+                        }
                     }
                 }
-        }
-    }
-}
-
-    private fun insertCountry(pais: String, capital: String, poblacion: String, continente: String, codigo: String, area: String) {
-
-        Log.d("Response", pais + "insertCountry"+ capital + poblacion + continente)
-
-        val queue = Volley.newRequestQueue(this)
-        val url = "https://servicios.campus.pe/paisesinsert.php"
-
-        val stringRequest = object: StringRequest(
-            Request.Method.POST, url,
-            { response ->
-                Log.d("Response JSON ", response);
-
-                startActivity(Intent(this@PaisesInsertActivity, PaisesActivity::class.java))
-            },
-            {  }) {
-            override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String, String>()
-                params["pais"] = pais
-                params["capital"] = capital
-                params["poblacion"] = poblacion
-                params["continente"] = continente
-                params["codpais"] = codigo
-                params["area"]= area
-                return params
             }
         }
-        queue.add(stringRequest)
     }
 }
 

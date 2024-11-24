@@ -28,5 +28,9 @@
     <string name="title_activity_paises">PaisesActivity</string>
     <string name="title_activity_detalle">DetalleActivity</string>
     <string name="title_activity_paises_insert">PaisesInsertActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_user_activty">UserActivty</string>
+    <string name="title_activity_user_insert">UserInsertActivity</string>
+    <string name="title_activity_user_update">UserUpdateActivity</string>
 
 </resources>

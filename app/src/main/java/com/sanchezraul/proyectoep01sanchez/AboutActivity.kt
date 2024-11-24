@@ -130,7 +130,8 @@ class AboutActivity : ComponentActivity() {
                         DrawBottomBar(
                             {startActivity(Intent(this@AboutActivity, MaestroActivity::class.java))},
                             {startActivity(Intent(this@AboutActivity, LocalesActivity::class.java))},
-                            { startActivity(Intent(this@AboutActivity, PaisesActivity::class.java))})
+                            { startActivity(Intent(this@AboutActivity, PaisesActivity::class.java))},
+                            {startActivity(Intent(this@AboutActivity, LoginActivity::class.java))})
 
 
                     },
