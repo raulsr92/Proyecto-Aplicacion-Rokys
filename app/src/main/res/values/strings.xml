@@ -32,5 +32,9 @@
     <string name="title_activity_user_activty">UserActivty</string>
     <string name="title_activity_user_insert">UserInsertActivity</string>
     <string name="title_activity_user_update">UserUpdateActivity</string>
+    <string name="title_activity_locales_room">LocalesRoomActivity</string>
+    <string name="title_activity_locales_insert_room">LocalesInsertRoomActivity</string>
+    <string name="title_activity_locales_update_room">LocalesUpdateRoomActivity</string>
+    <string name="title_activity_alert_design">AlertDesignActivity</string>
 
 </resources>

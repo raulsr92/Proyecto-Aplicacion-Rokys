@@ -50,6 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -100,7 +101,7 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         DrawBottomBar(
                             {startActivity(Intent(this@MainActivity, MaestroActivity::class.java))},
-                            {startActivity(Intent(this@MainActivity, LocalesActivity::class.java))},
+                            {startActivity(Intent(this@MainActivity, LocalesRoomActivity::class.java))},
                             { startActivity(Intent(this@MainActivity, PaisesActivity::class.java))},
                             {startActivity(Intent(this@MainActivity, LoginActivity::class.java))}
                             )

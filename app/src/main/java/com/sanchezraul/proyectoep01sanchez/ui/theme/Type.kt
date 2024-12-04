@@ -62,7 +62,18 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp,
         textAlign = TextAlign.Center
-
     )
+    ,
+
+    displayLarge =  TextStyle(
+        fontFamily = HindGuntur,
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp,
+        textAlign = TextAlign.Center
+    )
+
+
 
 )

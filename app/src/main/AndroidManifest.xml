@@ -17,6 +17,27 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".localesROOM.AlertDesignActivity"
+            android:exported="false"
+            android:label="@string/title_activity_alert_design"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+
+        <activity
+            android:name=".localesROOM.LocalesUpdateRoomActivity"
+            android:exported="false"
+            android:label="@string/title_activity_locales_update_room"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
+            android:name=".localesROOM.LocalesInsertRoomActivity"
+            android:exported="false"
+            android:label="@string/title_activity_locales_insert_room"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
+            android:name=".localesROOM.LocalesRoomActivity"
+            android:exported="false"
+            android:label="@string/title_activity_locales_room"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
             android:name=".UserUpdateActivity"
             android:exported="false"
             android:label="@string/title_activity_user_update"
@@ -72,6 +93,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:exported="false"

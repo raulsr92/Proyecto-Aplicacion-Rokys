@@ -50,6 +50,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
 import com.sanchezraul.proyectoep01sanchez.dao.DatabaseProvider
 import com.sanchezraul.proyectoep01sanchez.dao.User
+import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -148,7 +149,7 @@ class UserInsertActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@UserInsertActivity,
-                                        LocalesActivity::class.java
+                                        LocalesRoomActivity::class.java
                                     )
                                 )
                             },

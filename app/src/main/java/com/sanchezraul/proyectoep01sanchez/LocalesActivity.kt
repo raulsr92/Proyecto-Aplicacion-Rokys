@@ -50,6 +50,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -151,7 +152,7 @@ class LocalesActivity : ComponentActivity() {
 
                         DrawBottomBar(
                             {startActivity(Intent(this@LocalesActivity, MaestroActivity::class.java))},
-                            {startActivity(Intent(this@LocalesActivity, LocalesActivity::class.java))},
+                            {startActivity(Intent(this@LocalesActivity, LocalesRoomActivity::class.java))},
                             { startActivity(Intent(this@LocalesActivity, PaisesActivity::class.java))},
                             {startActivity(Intent(this@LocalesActivity, LoginActivity::class.java))})
                     },

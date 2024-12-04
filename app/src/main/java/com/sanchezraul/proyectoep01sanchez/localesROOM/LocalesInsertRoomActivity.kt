@@ -1,11 +1,11 @@
-package com.sanchezraul.proyectoep01sanchez
+package com.sanchezraul.proyectoep01sanchez.localesROOM
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
@@ -33,9 +32,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
@@ -47,34 +43,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
-import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
+import androidx.lifecycle.lifecycleScope
+import com.sanchezraul.proyectoep01sanchez.MainActivity
+import com.sanchezraul.proyectoep01sanchez.R
+import com.sanchezraul.proyectoep01sanchez.dao.DatabaseLocalProvider
+import com.sanchezraul.proyectoep01sanchez.dao.DatabaseProvider
+import com.sanchezraul.proyectoep01sanchez.dao.Local
+import com.sanchezraul.proyectoep01sanchez.ui.theme.ProyectoEP01SanchezTheme
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color5
-import com.sanchezraul.proyectoep01sanchez.ui.theme.ProyectoEP01SanchezTheme
+import kotlinx.coroutines.launch
 
-class PaisesInsertActivity : ComponentActivity() {
+class LocalesInsertRoomActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var pais by remember { mutableStateOf("") }
-            var capital by remember { mutableStateOf("") }
-            var poblacion by remember { mutableStateOf("") }
-            var continente by remember { mutableStateOf("") }
-            var codigo by remember { mutableStateOf("") }
-            var area by remember { mutableStateOf("") }
-
+            var nombre by remember { mutableStateOf("") }
+            var direccion by remember { mutableStateOf("") }
+            var latitud by remember { mutableStateOf("") }
+            var longitud by remember { mutableStateOf("") }
+            var telefono by remember { mutableStateOf("") }
 
             ProyectoEP01SanchezTheme {
                 Scaffold(
@@ -108,7 +105,7 @@ class PaisesInsertActivity : ComponentActivity() {
                                             .clickable {
                                                 startActivity(
                                                     Intent(
-                                                        this@PaisesInsertActivity,
+                                                        this@LocalesInsertRoomActivity,
                                                         MainActivity::class.java
                                                     )
                                                 )
@@ -140,196 +137,169 @@ class PaisesInsertActivity : ComponentActivity() {
                             }
                         )
                     },
-                    bottomBar = {
-                        DrawBottomBar(
-                            {
-                                startActivity(
-                                    Intent(
-                                        this@PaisesInsertActivity,
-                                        MaestroActivity::class.java
-                                    )
-                                )
-                            },
-                            {
-                                startActivity(
-                                    Intent(
-                                        this@PaisesInsertActivity,
-                                        LocalesRoomActivity::class.java
-                                    )
-                                )
-                            },
-                            {
-                                startActivity(
-                                    Intent(
-                                        this@PaisesInsertActivity,
-                                        PaisesActivity::class.java
-                                    )
-                                )
-                            },
-                            {startActivity(Intent(this@PaisesInsertActivity, LoginActivity::class.java))})
-                    },
-                ) { innerPadding ->
+
+                    ) { innerPadding ->
                     Column(
                         modifier = Modifier
                             .padding(innerPadding)
-                            .background(Color2)
                             .fillMaxSize()
-
+                            .background(Color.White)
                     ) {
-                        Spacer(modifier = Modifier.height(5.dp))
-
-                        Column (
-                            modifier = Modifier.fillMaxWidth()
-                            .padding(0.dp, 20.dp, 0.dp, 10.dp)
-                                ,
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ){
-                            Text(
-                                text = "Registra un nuevo país".uppercase(),
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = Color1
-                            )
-                        }
                         Spacer(modifier = Modifier.height(0.dp))
+
                         Column(
-                            modifier = Modifier.fillMaxSize()
-                                ,
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(0.dp, 20.dp, 0.dp, 10.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
-
-                            ) {
-                            OutlinedTextField(
-                                value= pais,
-                                //shape = RoundedCornerShape(20.dp),
-                                onValueChange = {
-                                    pais = it
-                                },
-                                label = {
-                                    Text(
-                                        text="País",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            OutlinedTextField(
-                                value= capital,
-                                //shape = RoundedCornerShape(20.dp),
-
-                                onValueChange = {
-                                    capital = it
-                                },
-                                label = {
-                                    Text(
-                                        text="Capital",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            OutlinedTextField(
-                                value= poblacion,
-                                //shape = RoundedCornerShape(20.dp),
-
-                                onValueChange = {
-                                    poblacion = it
-                                },
-                                label = {
-                                    Text(
-                                        text="Población",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            OutlinedTextField(
-                                value= continente,
-                                //shape = RoundedCornerShape(20.dp),
-
-                                onValueChange = {
-                                    continente = it
-                                },
-                                label = {
-                                    Text(
-                                        text="Continente",
-                                        style = MaterialTheme.typography.displayMedium,
-                                    )
-                                },
-                                textStyle = TextStyle(
-                                    color = Color3,
-                                )
-
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-
+                        ) {
                             Row(
-                                modifier = Modifier
-                                    .padding(40.dp, 0.dp, 40.dp, 0.dp)
-                                    ,
-                                horizontalArrangement = Arrangement.Center
-
+                                modifier = Modifier.fillMaxWidth()
+                                    .background(Color2)
+                                    //.border(BorderStroke(1.dp, Color3))
+                                ,
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                OutlinedTextField(
-                                    value= codigo,
-                                    //shape = RoundedCornerShape(20.dp),
-
-                                    onValueChange = {
-                                        codigo = it
-                                    },
-                                    label = {
-                                        Text(
-                                            text="Código",
-                                            style = MaterialTheme.typography.displayMedium,
-                                        )
-                                    },
-                                    textStyle = TextStyle(
-                                        color = Color3,
-                                    ),
-                                    modifier = Modifier.fillMaxWidth(0.4f)
-
+                                Text(
+                                    modifier = Modifier.padding(0.dp,20.dp,0.dp,0.dp)
+                                        .background(Color2),
+                                    text = "Nuevo Local".uppercase(),
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    color = Color1
                                 )
-                                Spacer(modifier = Modifier.width(10.dp))
+                                Spacer(modifier = Modifier.width(20.dp))
 
-                                OutlinedTextField(
-                                    value= area,
-                                    //shape = RoundedCornerShape(20.dp),
+                                Icon(
+                                    painter = painterResource(id = R.drawable.restaurant),
 
-                                    onValueChange = {
-                                        area = it
-                                    },
-                                    label = {
-                                        Text(
-                                            text="Área",
-                                            style = MaterialTheme.typography.displayMedium,
-                                        )
-                                    },
-                                    textStyle = TextStyle(
-                                        color = Color3,
-                                    )
+                                    tint =Color1,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clickable {
+
+                                        },
                                 )
                             }
 
+                        }
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            OutlinedTextField(
+                                value = nombre,
+                                onValueChange = {
+                                    nombre = it
+                                },
+                                label = {
+                                    Text(
+                                        text = "Nombre",
+                                        style = MaterialTheme.typography.displayMedium,
+                                    )
+                                },
+                                textStyle = TextStyle(
+                                    color = Color3,
+                                )
+                            )
+                            Spacer(modifier = Modifier.height(15.dp))
+                            OutlinedTextField(
+                                value = direccion,
+                                //shape = RoundedCornerShape(20.dp),
+
+                                onValueChange = {
+                                    direccion = it
+                                },
+                                label = {
+                                    Text(
+                                        text = "Dirección",
+                                        style = MaterialTheme.typography.displayMedium,
+                                    )
+                                },
+                                textStyle = TextStyle(
+                                    color = Color3,
+                                )
+                            )
                             Spacer(modifier = Modifier.height(15.dp))
 
-                            Column (
+                            OutlinedTextField(
+                                value = latitud,
+                                //shape = RoundedCornerShape(20.dp),
+
+                                onValueChange = {
+                                    latitud = it
+                                },
+                                label = {
+                                    Text(
+                                        text = "Latitud",
+                                        style = MaterialTheme.typography.displayMedium,
+                                    )
+                                },
+                                textStyle = TextStyle(
+                                    color = Color3,
+                                )
+                            )
+                            Spacer(modifier = Modifier.height(15.dp))
+                            OutlinedTextField(
+                                value = longitud,
+                                //shape = RoundedCornerShape(20.dp),
+
+                                onValueChange = {
+                                    longitud = it
+                                },
+                                label = {
+                                    Text(
+                                        text = "Longitud",
+                                        style = MaterialTheme.typography.displayMedium,
+                                    )
+                                },
+                                textStyle = TextStyle(
+                                    color = Color3,
+                                )
+                            )
+                            Spacer(modifier = Modifier.height(15.dp))
+                            OutlinedTextField(
+                                value = telefono,
+                                //shape = RoundedCornerShape(20.dp),
+
+                                onValueChange = {
+                                    telefono = it
+                                },
+                                label = {
+                                    Text(
+                                        text = "Teléfono",
+                                        style = MaterialTheme.typography.displayMedium,
+                                    )
+                                },
+                                textStyle = TextStyle(
+                                    color = Color3,
+                                )
+                            )
+                            Spacer(modifier = Modifier.height(40.dp))
+
+                            Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(50.dp,0.dp,50.dp,0.dp),
+                                    .padding(40.dp, 0.dp, 40.dp, 0.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Button(
                                     onClick = {
-                                        insertCountry(pais, capital, poblacion, continente, codigo, area)
+                                        val database = DatabaseLocalProvider.getDatabase(this@LocalesInsertRoomActivity)
+                                        val localDao = database.localDao()
+                                        lifecycleScope.launch {
+                                            var local = Local(
+                                                namelocal = nombre,
+                                                direccionlocal = direccion,
+                                                latitud = latitud.toDouble(),
+                                                longitud = longitud.toDouble(),
+                                                telefonolocal = telefono
+                                            )
+
+                                            localDao.insertLocal(local)
+                                            finish()
+                                        }
                                     },
                                     modifier = Modifier.fillMaxWidth()
                                         .height(55.dp)
@@ -337,48 +307,16 @@ class PaisesInsertActivity : ComponentActivity() {
                                 ) {
                                     Text(
                                         text = "Registrar".uppercase(),
-                                        color  = Color2,
+                                        color = Color2,
                                         style = MaterialTheme.typography.displayMedium,
 
                                         )
                                 }
                             }
                         }
-
-
                     }
                 }
-        }
-    }
-}
-
-    private fun insertCountry(pais: String, capital: String, poblacion: String, continente: String, codigo: String, area: String) {
-
-        Log.d("Response", pais + "insertCountry"+ capital + poblacion + continente)
-
-        val queue = Volley.newRequestQueue(this)
-        val url = "https://servicios.campus.pe/paisesinsert.php"
-
-        val stringRequest = object: StringRequest(
-            Request.Method.POST, url,
-            { response ->
-                Log.d("Response JSON ", response);
-
-                startActivity(Intent(this@PaisesInsertActivity, PaisesActivity::class.java))
-            },
-            {  }) {
-            override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String, String>()
-                params["pais"] = pais
-                params["capital"] = capital
-                params["poblacion"] = poblacion
-                params["continente"] = continente
-                params["codpais"] = codigo
-                params["area"]= area
-                return params
             }
         }
-        queue.add(stringRequest)
     }
 }
-

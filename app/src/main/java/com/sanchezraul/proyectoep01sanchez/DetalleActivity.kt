@@ -57,6 +57,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -215,7 +216,7 @@ class DetalleActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@DetalleActivity,
-                                        LocalesActivity::class.java
+                                        LocalesRoomActivity::class.java
                                     )
                                 )
                             },

@@ -58,6 +58,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -150,7 +151,7 @@ class FoodActivity : ComponentActivity() {
                     bottomBar = {
                         DrawBottomBar(
                             {startActivity(Intent(this@FoodActivity, MaestroActivity::class.java))},
-                            {startActivity(Intent(this@FoodActivity, LocalesActivity::class.java))},
+                            {startActivity(Intent(this@FoodActivity, LocalesRoomActivity::class.java))},
                             { startActivity(Intent(this@FoodActivity, PaisesActivity::class.java))},
                             {startActivity(Intent(this@FoodActivity, LoginActivity::class.java))})
 

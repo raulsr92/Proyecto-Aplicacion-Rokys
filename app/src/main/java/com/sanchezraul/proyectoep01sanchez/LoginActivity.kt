@@ -41,6 +41,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sanchezraul.proyectoep01sanchez.components.DrawBottomBar
+import com.sanchezraul.proyectoep01sanchez.localesROOM.LocalesRoomActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -131,7 +132,7 @@ class LoginActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@LoginActivity,
-                                        LocalesActivity::class.java
+                                        LocalesRoomActivity::class.java
                                     )
                                 )
                             },
@@ -169,10 +170,8 @@ class LoginActivity : ComponentActivity() {
                         }
                         Spacer(modifier = Modifier.height(0.dp))
                         Column(
-                            modifier = Modifier.fillMaxSize()
-                            ,
+                            modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
-
                             ) {
                             OutlinedTextField(
                                 value= " ",
