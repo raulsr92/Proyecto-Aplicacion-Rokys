@@ -36,5 +36,6 @@
     <string name="title_activity_locales_insert_room">LocalesInsertRoomActivity</string>
     <string name="title_activity_locales_update_room">LocalesUpdateRoomActivity</string>
     <string name="title_activity_alert_design">AlertDesignActivity</string>
+    <string name="title_activity_maps_locales">MapsLocalesActivity</string>
 
 </resources>

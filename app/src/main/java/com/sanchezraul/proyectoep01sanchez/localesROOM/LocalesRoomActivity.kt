@@ -56,6 +56,7 @@ import com.sanchezraul.proyectoep01sanchez.R
 import com.sanchezraul.proyectoep01sanchez.dao.DatabaseLocalProvider
 import com.sanchezraul.proyectoep01sanchez.dao.Local
 import com.sanchezraul.proyectoep01sanchez.dao.LocalDao
+import com.sanchezraul.proyectoep01sanchez.maps.MapsLocalesActivity
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color1
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color2
 import com.sanchezraul.proyectoep01sanchez.ui.theme.Color3
@@ -330,6 +331,19 @@ class LocalesRoomActivity : ComponentActivity() {
                                                             modifier = Modifier.
                                                                 size(40.dp)
                                                                 .clickable {
+                                                                    val intent = Intent(this@LocalesRoomActivity,
+                                                                        MapsLocalesActivity::class.java)
+
+                                                                    // Pasar variables
+
+                                                                    intent.putExtra("idMapa", local.idlocal)
+                                                                    intent.putExtra("nombreMapa", local.namelocal)
+                                                                    intent.putExtra("direccionMapa", local.direccionlocal)
+                                                                    intent.putExtra("latitudMapa", local.latitud)
+                                                                    intent.putExtra("longitudMapa", local.longitud)
+                                                                    intent.putExtra("telefonoMapa", local.telefonolocal)
+
+                                                                    startActivity(intent)
                                                                 },
                                                         )
                                                     }

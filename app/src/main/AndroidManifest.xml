@@ -17,11 +17,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".maps.MapsLocalesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps_locales"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyByirS0TRZFEh3cLfRcjeF9Ty7sLiuFOxc" />
+
+        <activity
             android:name=".localesROOM.AlertDesignActivity"
             android:exported="false"
             android:label="@string/title_activity_alert_design"
             android:theme="@style/Theme.ProyectoEP01Sanchez" />
-
         <activity
             android:name=".localesROOM.LocalesUpdateRoomActivity"
             android:exported="false"
@@ -93,7 +102,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AboutActivity"
             android:exported="false"
