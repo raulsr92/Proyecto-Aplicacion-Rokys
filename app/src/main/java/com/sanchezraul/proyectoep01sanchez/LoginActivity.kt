@@ -132,7 +132,7 @@ class LoginActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@LoginActivity,
-                                        LocalesRoomActivity::class.java
+                                        LocalesMapActivity::class.java
                                     )
                                 )
                             },

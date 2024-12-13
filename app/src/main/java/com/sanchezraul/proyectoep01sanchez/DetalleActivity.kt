@@ -216,7 +216,7 @@ class DetalleActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@DetalleActivity,
-                                        LocalesRoomActivity::class.java
+                                        LocalesMapActivity::class.java
                                     )
                                 )
                             },

@@ -177,7 +177,7 @@ class MaestroActivity : ComponentActivity() {
 
                         DrawBottomBar(
                             {startActivity(Intent(this@MaestroActivity, MaestroActivity::class.java))},
-                            {startActivity(Intent(this@MaestroActivity, LocalesRoomActivity::class.java))},
+                            {startActivity(Intent(this@MaestroActivity, LocalesMapActivity::class.java))},
                             { startActivity(Intent(this@MaestroActivity, PaisesActivity::class.java))},
                             {startActivity(Intent(this@MaestroActivity, LoginActivity::class.java))})
 
@@ -235,7 +235,6 @@ class MaestroActivity : ComponentActivity() {
                                                     modifier= Modifier.background(Color7.copy(alpha = 0.6f))
                                                         .fillMaxWidth()
                                                         .padding(9.dp, 8.dp,0.dp,8.dp)
-
 
                                                 ){
                                                     Text(

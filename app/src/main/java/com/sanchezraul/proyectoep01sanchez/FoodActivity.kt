@@ -151,7 +151,7 @@ class FoodActivity : ComponentActivity() {
                     bottomBar = {
                         DrawBottomBar(
                             {startActivity(Intent(this@FoodActivity, MaestroActivity::class.java))},
-                            {startActivity(Intent(this@FoodActivity, LocalesRoomActivity::class.java))},
+                            {startActivity(Intent(this@FoodActivity, LocalesMapActivity::class.java))},
                             { startActivity(Intent(this@FoodActivity, PaisesActivity::class.java))},
                             {startActivity(Intent(this@FoodActivity, LoginActivity::class.java))})
 

@@ -160,7 +160,7 @@ class UserUpdateActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@UserUpdateActivity,
-                                        LocalesRoomActivity::class.java
+                                        LocalesMapActivity::class.java
                                     )
                                 )
                             },

@@ -17,6 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".LocalesMapLocationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_locales_map_location"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
+            android:name=".LocalesMapActivity"
+            android:exported="false"
+            android:label="@string/title_activity_locales_map"
+            android:theme="@style/Theme.ProyectoEP01Sanchez" />
+        <activity
             android:name=".maps.MapsLocalesActivity"
             android:exported="false"
             android:label="@string/title_activity_maps_locales"

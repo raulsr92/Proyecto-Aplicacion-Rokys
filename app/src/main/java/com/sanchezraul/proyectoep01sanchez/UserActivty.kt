@@ -165,7 +165,7 @@ class UserActivty : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@UserActivty,
-                                        LocalesRoomActivity::class.java
+                                        LocalesMapActivity::class.java
                                     )
                                 )
                             },

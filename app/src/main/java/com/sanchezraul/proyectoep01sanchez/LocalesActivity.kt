@@ -182,7 +182,6 @@ class LocalesActivity : ComponentActivity() {
                                     colors = CardDefaults.cardColors(containerColor = Color.White),
                                     modifier = Modifier.height(370.dp)
                                 ){
-
                                     Column(
                                         modifier = Modifier.fillMaxWidth()
                                     ) {

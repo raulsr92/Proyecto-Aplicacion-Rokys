@@ -154,7 +154,7 @@ class PaisesInsertActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@PaisesInsertActivity,
-                                        LocalesRoomActivity::class.java
+                                        LocalesMapActivity::class.java
                                     )
                                 )
                             },

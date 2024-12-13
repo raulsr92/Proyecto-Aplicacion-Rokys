@@ -149,7 +149,7 @@ class UserInsertActivity : ComponentActivity() {
                                 startActivity(
                                     Intent(
                                         this@UserInsertActivity,
-                                        LocalesRoomActivity::class.java
+                                        LocalesMapActivity::class.java
                                     )
                                 )
                             },
